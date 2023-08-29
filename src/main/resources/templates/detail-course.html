@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/fragments/layout :: main-layout(~{:: title}, ~{}, ~{:: #content}, ~{})}">
+<head>
+    <title>Chi tiết khóa học</title>
+</head>
+<body>
+<th:block id="content">
+    <main class="d-flex justify-content-center">
+        <div class="container mt-4">
+            <div class="mb-4">
+                <button class="btn-create btn text-white me-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Cập nhật</span>
+                </button>
+                <button class="btn-refresh btn btn-info text-white">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <span>Quay lại</span>
+                </button>
+                <button class="btn-delete btn btn-danger text-white float-end">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span>Xóa</span>
+                </button>
+            </div>
+            <div class="detail-form border border-primary">
+                <form action="" class="d-flex justify-content-between p-3">
+                    <div class="detail-left">
+                        <div class="d-flex flex-column mb-3">
+                            <label for="name">Tên khóa học</label>
+                            <input th:field="${course.name}" class="border border-secondary-subtle" type="text" name="name" id="name">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="description">Mô tả</label>
+                            <textarea th:field="${course.description}" class="border border-secondary-subtle p-6" name="description" id="description" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="detail-right">
+                        <div class="mb-3 type d-flex flex-column">
+                            <label for="type">Hình thức học</label>
+                            <input type="text" name="type" id="type" class="border border-secondary-subtle" th:field="${course.type}">
+                        </div>
+                        <div class="mb-3 topic">
+                            <label for="">Chủ đề</label>
+                            <div class="topic d-flex border border-secondary-subtle">
+                                <div class="topic-item" th:each="topic : ${course.topics}">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    <span th:text="${topic}">Backend</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="supporter mb-3 d-flex flex-column">
+                            <label for="supporter">Tư vấn viên</label>
+                            <input th:field="${course.userDto.name}" type="text" name="supporter" id="supporter" class="border border-secondary-subtle">
+                        </div>
+                        <div class="thumbnail">
+                            <label for="">Thumbnail</label>
+                            <div>
+                                <img class="img-thumbnail" th:src="${course.thumbnail}" alt="thumbnail">
+                            </div>
+                            <button class="btn btn-warning mt-2">Đổi ảnh</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</th:block>
+</body>
+</html>

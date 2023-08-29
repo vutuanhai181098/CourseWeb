@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/fragments/layout :: main-layout(~{:: title}, ~{}, ~{:: #content}, ~{})}">
+<head>
+    <title>Khóa học</title>
+</head>
+<body>
+<th:block id="content">
+    <main class="d-flex justify-content-center">
+        <div class="container mt-4">
+            <div class="mb-4">
+                <button class="btn-create btn text-white me-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Tạo khóa học</span>
+                </button>
+                <button class="btn-refresh btn btn-info text-white">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Refresh</span>
+                </button>
+            </div>
+            <div class="course-list">
+                <table class="table table-hover table-content">
+                    <thead>
+                    <tr class="text-white">
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên khóa học</th>
+                        <th scope="col">Hình thức</th>
+                        <th scope="col">Chủ đề</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider" th:each="course : ${courseList}">
+                    <tr>
+                        <th scope="row" th:text="${course.id}">1</th>
+                        <td class="text-primary" th:text="${course.name}">SpringBoot - Web Backend</td>
+                        <td th:text="${course.type}"></td>
+                        <td th:text="${course.topics}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</th:block>
+</body>
+</html>

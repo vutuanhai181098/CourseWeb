@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/fragments/layout :: main-layout(~{:: title}, ~{}, ~{:: #content}, ~{})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo khóa học</title>
+</head>
+<body>
+<th:block id="content">
+    <main class="d-flex justify-content-center">
+        <div class="container mt-4">
+            <div class="mb-4">
+                <button class="btn-create btn text-white me-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Tạo</span>
+                </button>
+                <button class="btn-refresh btn btn-info text-white">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <span>Quay lại</span>
+                </button>
+            </div>
+            <div class="create-course-form border border-primary">
+                <form action="" class="d-flex justify-content-between p-3">
+                    <div class="input-form ">
+                        <div class="d-flex flex-column mb-3">
+                            <label for="name">Tên khóa học</label>
+                            <input class="border border-secondary-subtle" type="text" name="" id="name">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="description">Mô tả</label>
+                            <textarea class="border border-secondary-subtle p-6" name="description" id="description" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="select-form">
+                        <div class="mb-3">
+                            <label for="type">Hình thức học</label>
+                            <select class="form-select" name="" id="type">
+                                <option selected>---Chọn hình thức học---</option>
+                                <option value="online">Trực tuyến</option>
+                                <option value="onlab">Phòng lab</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="topic">Chủ đề</label>
+                            <select class="form-select" name="" id="topic">
+                                <option selected>---Chọn chủ đề---</option>
+                                <th:block th:each="topic : ${topics}">
+                                    <option value="${topic}" th:text="${topic}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="">Tư vấn viên</label>
+                            <select class="form-select" name="" id="">
+                                <option selected>---Chọn tư vấn viên---</option>
+                                <th:block th:each="user : ${userDtos}">
+                                    <option value="${user.id}" th:text="${user.name}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!--header-->
+<th:block th:fragment="header">
+    <header class="d-flex align-items-center">
+        <div class="d-flex justify-content-start align-items-center ps-5">
+            <div class="logo">
+                <a href=""><img src="https://techmaster.vn/resources/image/logo-techmaster/white/white_200x74.png"
+                                alt="logo"></a>
+            </div>
+            <div class="menu">
+                <a th:href="@{/courses}" class="text-white ms-5">Danh sách khóa học</a>
+                <a th:href="@{/courses/create}" class="text-white ms-3">Tạo khóa học</a>
+            </div>
+        </div>
+    </header>
+</th:block>
+</body>
+</html>
