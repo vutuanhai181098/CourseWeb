@@ -28,12 +28,18 @@
                         <th scope="col">Chủ đề</th>
                     </tr>
                     </thead>
-                    <tbody class="table-group-divider" th:each="course : ${courseList}">
-                    <tr>
+                    <tbody class="table-group-divider">
+                    <tr th:each="course : ${courseList}">
                         <th scope="row" th:text="${course.id}">1</th>
                         <td class="text-primary" th:text="${course.name}">SpringBoot - Web Backend</td>
                         <td th:text="${course.type}"></td>
-                        <td th:text="${course.topics}">
+                        <td>
+                            <th:block th:if="${not #lists.isEmpty(course.topics)}">
+                                <span th:each="topic, topicIndex : ${course.topics}">
+                                    <span th:text="${topic}"></span>
+                                    <span th:if="${topicIndex.index < #lists.size(course.topics) - 1}">, </span>
+                                </span>
+                            </th:block>
                         </td>
                     </tr>
                     </tbody>
