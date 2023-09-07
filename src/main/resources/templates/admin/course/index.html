@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/fragments/layout :: main-layout(~{:: title}, ~{}, ~{:: #content}, ~{})}">
+      th:replace="~{/admin/layout/layout :: main-layout(~{:: title}, ~{}, ~{:: #content}, ~{:: #js})}">
 <head>
+    <meta charset="UTF-8">
     <title>Khóa học</title>
+
 </head>
+
 <body>
 <th:block id="content">
     <main class="d-flex justify-content-center">
@@ -31,13 +34,15 @@
                     <tbody class="table-group-divider">
                     <tr th:each="course : ${courseList}">
                         <th scope="row" th:text="${course.id}">1</th>
-                        <td class="text-primary" th:text="${course.name}">SpringBoot - Web Backend</td>
-                        <td th:style="${course.type == 'online' ? 'color: #F99F38;' : 'color: #0dcaf0;'}" th:text="${course.type}"></td>
+                        <td class="text-primary"><a th:href="@{/admin/courses/{id} (id = ${course.id})}"
+                                                    th:text="${course.name}"></a></td>
+                        <td th:style="${course.type == 'online' ? 'color: #F99F38;' : 'color: #0dcaf0;'}"
+                            th:text="${course.type}"></td>
                         <td>
                             <th:block th:if="${not #lists.isEmpty(course.topics)}">
                                 <span th:each="topic, topicIndex : ${course.topics}">
                                     <span th:text="${topic}"></span>
-                                    <span th:if="${topicIndex.index < #lists.size(course.topics) - 1}">, </span>
+                                    <span th:if="${topicIndex.index < #lists.size(course.topics)-1}">, </span>
                                 </span>
                             </th:block>
                         </td>
@@ -47,6 +52,21 @@
             </div>
         </div>
     </main>
+</th:block>
+
+<th:block id="js">
+    <script>
+        const btnCreate = $(".btn-create")
+        const btnRefresh = $(".btn-refresh")
+
+        btnRefresh.on('click', () => {
+            location.reload();
+        })
+
+        btnCreate.on('click', () => {
+            location.href='/admin/courses/create'
+        })
+    </script>
 </th:block>
 </body>
 </html>

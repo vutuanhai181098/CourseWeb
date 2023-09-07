@@ -25,6 +25,6 @@ public class UpsertCourseRequest {
     String type;
     List<String> topics;
     String thumbnail;
-    @NotBlank(message = "userid không được để trống")
+    @NotNull(message = "userid không được để trống")
     Integer userId;
 }

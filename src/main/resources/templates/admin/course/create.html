@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/admin/layout/layout :: main-layout(~{:: title}, ~{:: #css}, ~{:: #content}, ~{:: #js})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo khóa học</title>
+
+    <th:block id="css">
+        <!-- Link select2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    </th:block>
+</head>
+
+<body>
+<th:block id="content">
+    <main class="d-flex justify-content-center">
+        <div class="container mt-4">
+            <div class="mb-4">
+                <button class="btn-create btn text-white me-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Tạo</span>
+                </button>
+                <button class="btn-back btn btn-info text-white">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <span>Quay lại</span>
+                </button>
+            </div>
+            <div class="create-course-form border border-primary">
+                <form action="" class="d-flex justify-content-between p-3">
+                    <div class="input-form ">
+                        <div class="d-flex flex-column mb-3">
+                            <label for="course-name">Tên khóa học</label>
+                            <input class="border border-secondary-subtle" type="text" id="course-name">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="course-description">Mô tả</label>
+                            <textarea class="border border-secondary-subtle p-6" id="course-description"
+                                      cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="select-form">
+                        <div class="mb-3">
+                            <label for="course-type">Hình thức học</label>
+                            <select class="form-select" name="" id="course-type">
+                                <option hidden>-- Chọn hình thức học --</option>
+                                <option value="online">Trực tuyến</option>
+                                <option value="onlab">Phòng lab</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="course-topic">Chủ đề</label>
+                            <select class="form-select" multiple="multiple" id="course-topic">
+                                <th:block th:each="topic : ${topics}">
+                                    <option th:value="${topic}" th:text="${topic}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="course-supporter">Tư vấn viên</label>
+                            <select class="form-select" id="course-supporter">
+                                <option hidden="">-- Chọn tư vấn viên --</option>
+                                <th:block th:each="user : ${userList}">
+                                    <option th:value="${user.id}" th:text="${user.name}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</th:block>
+
+<th:block id="js">
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        const courseTopic = $("#course-topic");
+        // Kích hoạt select2
+        courseTopic.select2({
+            placeholder: "-- Chọn chủ đề",
+        });
+
+        const btnBack = $(".btn-back");
+        btnBack.on('click', () => {
+            location.href='/admin/courses'
+        })
+
+        const courseName = $("#course-name")
+        const courseDescription = $("#course-description")
+        const courseType = $("#course-type")
+        const courseSupporter = $("#course-supporter")
+        const btnCreate = $(".btn-create");
+
+        btnCreate.on('click' , async () => {
+            let param = {
+                "name" : courseName.val(),
+                "description" : courseDescription.val(),
+                "type" : courseType.val(),
+                "topics" : courseTopic.val(),
+                "userId" : courseSupporter.val()
+            }
+            try{
+                const res = await axios.post("/api/v1/admin/courses", param)
+                console.log(res)
+                if (res.status === 201) {
+                    window.alert("Tạo khóa học thành công")
+                    location.href='/admin/courses'
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        })
+    </script>
+</th:block>
+</body>
+</html>

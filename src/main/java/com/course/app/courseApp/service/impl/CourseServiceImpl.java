@@ -10,6 +10,7 @@ import com.course.app.courseApp.repository.CourseRepository;
 import com.course.app.courseApp.repository.UserRepository;
 import com.course.app.courseApp.request.UpsertCourseRequest;
 import com.course.app.courseApp.service.CourseService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
@@ -54,6 +56,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDto createCourse(UpsertCourseRequest upsertCourseRequest) {
         Course course = courseMapper.convertTo(upsertCourseRequest);
+        log.info("course={}", course);
         User user = userRepository.getUserById(course.getUserId()).orElseThrow(() -> {
             throw new ResourceNotFoundException("Not found user");
         });

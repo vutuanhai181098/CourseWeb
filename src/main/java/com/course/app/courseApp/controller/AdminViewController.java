@@ -28,22 +28,26 @@ public class AdminViewController {
     public String getAdminPage(Model model){
         List<CourseDto> courseDtoList = courseService.getAllCourse();
         model.addAttribute("courseList", courseDtoList);
-        return "admin-page";
+        return "admin/course/index";
     }
 
     @GetMapping("/create")
     public String getCreateCoursePage(Model model){
         List<String> topics = topicService.getALlTopic();
-        List<UserDto> userDtos = userService.getALlUser();
+        List<UserDto> userList = userService.getALlUser();
         model.addAttribute("topics" , topics);
-        model.addAttribute("userDtos", userDtos);
-        return "create-course-page";
+        model.addAttribute("userList", userList);
+        return "admin/course/create";
     }
 
     @GetMapping("/{id}")
     public String getCourseById(@PathVariable Integer id, Model model){
         CourseDto courseDto = courseService.getCourseById(id);
+        List<String> topicList = topicService.getALlTopic();
+        List<UserDto> userList = userService.getALlUser();
         model.addAttribute("course" , courseDto);
-        return "detail-course";
+        model.addAttribute("topicList", topicList);
+        model.addAttribute("userList", userList);
+        return "admin/course/detail";
     }
 }

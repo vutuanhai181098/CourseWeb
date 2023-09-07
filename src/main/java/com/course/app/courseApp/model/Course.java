@@ -1,5 +1,6 @@
 package com.course.app.courseApp.model;
 
+import com.course.app.courseApp.database.CourseDB;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,8 +11,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@ToString
 public class Course {
     static AtomicInteger autoId = new AtomicInteger(0);
     Integer id;

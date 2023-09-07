@@ -1,10 +1,13 @@
 package com.course.app.courseApp.database;
 
 import com.course.app.courseApp.model.Course;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Component
 public class CourseDB {
     public static List<Course> courseList = new ArrayList<>(
             List.of(

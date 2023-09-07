@@ -44,7 +44,7 @@ header {
 }
 
 .table-content thead tr {
-  background-color: #009879;
+    background-color: #009879;
 }
 
 .table-content th,
@@ -101,17 +101,4 @@ img {
 
 .detail-right {
   width: 38%;
-}
-
-.topic-item {
-  cursor: pointer;
-  background-color:  #d1d1d1;
-  border-radius: 5px;
-  padding: 3px;
-  margin: 3px;
-}
-
-.topic-item i {
-  padding: 5px 5px 5px 0px  ;
-  border-right: 1px solid #96989a;
 }

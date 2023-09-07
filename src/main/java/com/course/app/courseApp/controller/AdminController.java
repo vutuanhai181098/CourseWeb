@@ -1,6 +1,5 @@
 package com.course.app.courseApp.controller;
 
-import com.course.app.courseApp.dto.CourseDto;
 import com.course.app.courseApp.request.UpsertCourseRequest;
 import com.course.app.courseApp.service.CourseService;
 import jakarta.validation.Valid;
